@@ -79,20 +79,6 @@ class Selling1 extends AbstractSelling {
     super()
   }
 
-  get product(): Product | undefined {
-    return this._product
-  }
-  set product(val: Product) {
-    this._product = val;
-  }
-
-  get productCount(): number {
-    return this._productCount
-  }
-  set productCount(val: number) {
-    this._productCount = val;
-  }
-
   getPrice(): number {
     if (this.product && this.productCount) return +((this.product.price - this.discount) * this.productCount).toFixed(2)
     return 0;
@@ -127,20 +113,6 @@ class Selling2 extends AbstractSelling {
 
   constructor() {
     super()
-  }
-
-  get product(): Product | undefined {
-    return this._product
-  }
-  set product(val: Product) {
-    this._product = val;
-  }
-
-  get productCount(): number {
-    return this._productCount
-  }
-  set productCount(val: number) {
-    this._productCount = val;
   }
 
   getPrice(): number {
