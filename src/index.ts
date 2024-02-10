@@ -1,0 +1,106 @@
+// enum StatusStudent {
+//   enrollee,
+//   student,
+//   graduate,
+//   bachelo,
+// }
+enum StatusStudent {
+  enrollee = 'enrollee',
+  student = 'student',
+  graduate = 'graduate',
+  bachelo = 'bachel',
+}
+
+class APerson {
+  age?: number;
+
+  constructor(public readonly name: string, age?: number){
+    this.age = age
+  }
+
+  method(s: string){
+    return 'APerson ' + s + " ok"
+  }
+}
+
+// типы свойств
+// public - доступно везде; protected - доступны в самом классе и дочерних; private - доступны только внутри самого класса;
+// private появилась и в JS - такие свойства начинаются с #
+class Student extends APerson {
+  id: string;
+  status: StatusStudent = StatusStudent.enrollee;
+  name: string;
+  course?: string;
+  _module: number = 0;
+  createAt?: Date;
+  updateAt?: Date;
+  // _module?: number; можно так  чтоб не ругалось
+  // _module!: number; можно так описать чтоб не ругалось
+  // можно отключить 👇  и тогда можно не инициализировать свойства класса
+  // "strictPropertyInitialization": true,             /* Check for class properties that are declared but not set in the constructor. */
+
+  static get rndId(): string {
+    return Math.random().toString(32).substring(2, 6) + Date.now().toString().substring(9)
+  }
+
+  static { // статический блок кода. выполняется когда инициализируется сам класс. не обьекты
+    console.log('class Student init-----------');
+    
+  }
+
+  override method(s: string){
+    return 'Student ' + s + " ok" + ' -- ' + super.method(s)
+  }
+
+  constructor(name: string);
+  constructor(name: string, course: string);
+  constructor(name: string, course?: string) {
+    super(name)
+    this.name = name
+    if(course){
+      this.course = course
+    }
+    this.id = Student.rndId; // Math.random().toString(32).substring(2, 6) + Date.now().toString().substring(9)
+  }
+  getInfo(): string {
+    return `id:${this.id} student:'${this.name}' on [${this.course}] module: ${this._module}`
+  }
+  get info(): string {
+    return this.getInfo()
+  }
+
+  set module(module: number) {
+    this._module = module
+  }
+  get module(): number {
+    return this._module
+  }
+
+  // перегрузка метода changeInfo
+  changeInfo(course: string): void;
+  changeInfo(module: number): void;
+  changeInfo(course: string, module: number): void;
+  changeInfo(courseOrModule: string | number, module?: number): void {
+    if(typeof courseOrModule === 'string'){
+      this.course = courseOrModule
+      if(module) this.module = module
+    } else { // number
+      this.module = courseOrModule
+    }
+  }
+
+}
+
+const person1 = new APerson('pedro')
+const person2 = new APerson('gonsales', 22)
+console.log(person1, person2)
+
+const student = new Student('dim', 'front')
+student.module = 4
+console.log(student)
+console.log(student.info)
+
+console.log(student.method('aaaaaaaaaaaaaaaa'))
+
+
+// node dist/index.js
