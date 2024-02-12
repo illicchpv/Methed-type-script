@@ -1,0 +1,19 @@
+const log = <T,>(val: T): T => { // <---   <T,>
+  console.log(val);
+  return val
+}
+log('string')
+log<string>('string')
+log(111)
+
+function flog<T>(val: T): T {
+  console.log(val);
+  return val  
+}
+flog('string')
+flog<string>('string')
+flog(111)
+
+
+
+// node dist/main.js

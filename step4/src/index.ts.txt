@@ -2,13 +2,13 @@
 //   enrollee,
 //   student,
 //   graduate,
-//   bachelo,
+//   bachelor,
 // }
 enum StatusStudent {
   enrollee = 'enrollee',
   student = 'student',
   graduate = 'graduate',
-  bachelo = 'bachel',
+  bachelor = 'bachelor',
 }
 
 class APerson {
@@ -43,7 +43,7 @@ class Student extends APerson {
     return Math.random().toString(32).substring(2, 6) + Date.now().toString().substring(9)
   }
 
-  static { // статический блок кода. выполняется когда инициализируется сам класс. не обьекты
+  static { // статический блок кода. выполняется когда инициализируется сам класс. не объекты
     console.log('class Student init-----------');
     
   }
@@ -92,7 +92,7 @@ class Student extends APerson {
 }
 
 const person1 = new APerson('pedro')
-const person2 = new APerson('gonsales', 22)
+const person2 = new APerson('gonzales', 22)
 console.log(person1, person2)
 
 const student = new Student('dim', 'front')
